@@ -107,7 +107,7 @@ def print_flier(insert_data):
 # 반환 : 이상치를 삭제한 최종 데이터
 # 주의 : 이상치 계산하는 거에서 upper, lower 반환값을 변수로 설정해두어야 함
 # 미완성!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!실행안됨!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
+'''
 def drop_flier(insert_data, col_name):
     global lower
     global upper
@@ -126,6 +126,7 @@ def drop_flier(insert_data, col_name):
     print(f" '{col_name}' 컬럼에서 upper 초과의 값 제거 후 shape: {insert_data.shape}")
 
     return insert_data
+'''
 
 
 # ---------------------------------------------------------------------
@@ -164,16 +165,4 @@ def scaling(scale_type):
     return scaler, scaled_X_train, scaled_X_test, model
 
 
-# <사용예시>
-file = load_iris()
-data = file['data']
-data = pd.DataFrame(data, columns=['sepal-length', 'sepal-width', 'petal-length', 'petal-width'])
-target = file['target']
-target = pd.Series(target, name = 'variety')
-
-visual_flier(data)
-
-lower, upper = print_flier(data)
-
-data = drop_flier(data, 'sepal-width')
 
