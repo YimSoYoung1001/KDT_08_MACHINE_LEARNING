@@ -177,3 +177,107 @@ lower, upper = print_flier(data)
 
 data = drop_flier(data, 'sepal-width')
 
+
+# ==================================================================================================================
+# 상관관계 관련 함수들
+# ==================================================================================================================
+# 함수기능 : 피처 간의 상관관계를 scatter로 시각화
+# 매개변수 : 행수, 열수, 피쳐 리스트
+# 반환 : 없음
+
+
+
+
+
+def print_only_features(col_list):
+    j = 1
+    for i in range(len(col_list)):
+        plt.figure(figsize=(15, 15))
+
+        for k in range(len(col_list)):
+            plt.subplot(len(col_list), len(col_list), j)
+            plt.scatter(data[col_list[i]], data[col_list[k]])
+            plt.xlabel(col_list[i])
+            plt.ylabel(col_list[k])
+            j += 1
+        plt.tight_layout()
+        plt.show()
+
+#사용예시
+# col_list = ['sepal-length', 'petal-length', 'petal-width']
+# print_only_features(col_list)
+
+
+# ---------------------------------------------------------------------
+# 함수기능 : 피처와 타겟과의 관계 정도를 시각화 및 수치값으로 표기 및 출력
+# 매개변수 : 행수, 열수, 타겟, 피쳐 리스트, 상관계수값
+# 반환 : 없음
+
+def print_feature(nrows, ncols, df, target, features, corr_list):
+    # idx를 결정하는 것은 피쳐의 수다.
+    for idx in range(len(features)):
+        # 인덱스는 0번 부터 시작하니까 +1 해주어야 함
+        plt.subplot(nrows, ncols, idx + 1)
+
+        # 타겟과 나머지 피쳐들이 for문 돌면서 순서대로 들어감
+        # corr은 라벨을 설정하기 위해서 넣어줌 (범례)
+        plt.scatter(df[target], df[features[idx]], label=f"{corr_list[idx]:.2}")
+
+        plt.legend()
+        plt.xlabel(target)
+        plt.ylabel(features[idx])
+    plt.tight_layout()  # 표들끼리 겹치지 않게끔 해준다
+    plt.show()
+
+# 파라미터값 사용 예시
+# nrows = 1
+# ncols = 4
+# df = use_data
+# target = 'mpg'
+# features = ['displacement', 'horsepower', 'weight', 'acceleration']
+
+
+# ---------------------------------------------------------------------
+# 함수기능 : 피처와 타겟과의 관계 정도를 시각화 및 수치값으로 표기 및 출력
+# 매개변수 : 행수, 열수, 타겟, 피쳐 리스트
+# 반환 : 없음
+
+def print_feature_corrNone(nrows, ncols, df, target, features):
+    # idx를 결정하는 것은 피쳐의 수다.
+    for idx in range(len(features)):
+        # 인덱스는 0번 부터 시작하니까 +1 해주어야 함
+        plt.subplot(nrows, ncols, idx + 1)
+
+        # 타겟과 나머지 피쳐들이 for문 돌면서 순서대로 들어감
+        # corr은 라벨을 설정하기 위해서 넣어줌 (범례)
+        plt.scatter(df[target], df[features[idx]])
+
+        plt.legend()
+        plt.xlabel(target)
+        plt.ylabel(features[idx])
+    plt.tight_layout()  # 표들끼리 겹치지 않게끔 해준다
+    plt.show()
+
+
+
+
+
+# ===================================================================================================================
+# 함수기능 : 성능평가
+# 매개변수 :
+# 반환 : 없음
+
+'''
+y_pred = model.predict(scaled_X_test)
+y_pred
+
+print('[ 모델설명도 ]')
+print(f"설정계수값(R2) : {r2_score(y_test, y_pred)}")
+
+# 처음에 테스트 데이터셋이 아닌 >>피쳐 데이터프레임 전체<<를 넣어버림! => 그래서 R2의 값이 마이너스의 값이 나옴 (잘못되었다는 예기)
+# 그런데 R2의 값은 0~1 범위의 값이 나온다. 마이너스가 나왔다는 것은 무언가 잘못되었다는 이야기
+
+print('[ 에러 ]')
+print(f"평균제곱오차(MSE) : {mean_squared_error(y_test, y_pred)}")
+print(f"평균절대값오차(MAE) : {mean_absolute_error(y_test, y_pred)}")
+'''
