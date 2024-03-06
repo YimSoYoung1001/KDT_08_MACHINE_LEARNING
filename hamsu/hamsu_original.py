@@ -119,11 +119,11 @@ def drop_flier(insert_data, col_name):
 
     mask = insert_data[col_name] >= lower.loc[col_name]
     insert_data = insert_data[mask]
-    print(f" '{col_name}' 컬럼에서 lower 미만의 값 제거 후 shape: {insert_data.shape}\n")
+    print(f" '{col_name}' 컬럼에서 lower 미만의 값 제거 후 shape: {insert_data.shape}")
 
     mask2 = insert_data[col_name] <= upper.loc[col_name]
     insert_data = insert_data[mask2]
-    print(f" '{col_name}' 컬럼에서 upper 초과의 값 제거 후 shape: {insert_data.shape}")
+    print(f" '{col_name}' 컬럼에서 upper 초과의 값 제거 후 shape: {insert_data.shape}\n")
 
     return insert_data
 
